@@ -1,46 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ExerciseTable from '../components/ExerciseTable'
+import LoadingSymbol from '../components/LoadingSymbol'
 
-function HomePage({setExerciseToEdit}) {
+function HomePage({ setExerciseToEdit, user }) {
     const history = useHistory();
     const [exercises, setExercises] = useState([]);
+    const [loading, setLoading] = useState(false)
 
     const onDelete = async id => {
-        console.log('calling onDelete')
-        const response = await fetch(`/exercises/${id}`, { method: 'DELETE' });
+        const token = await user.getIdToken()
+        const response = await fetch(`/exercises/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if (response.status === 204) {
-            const getResponse = await fetch('/exercises');
-            const exercises = await getResponse.json();
-            setExercises(exercises);
+            loadExercises(user)
         } else {
-        console.error(`Failed to delete exercise with id = ${id}, status code = ${response.status}`)
+            const error = response.json()
+            alert(error.error)
         }
-    }	
+    }
 
     const onEdit = async exerciseToEdit => {
         setExerciseToEdit(exerciseToEdit);
         history.push("/Edit");
     }
 
+    const loadExercises = async (user) => {
+        setLoading(true)
+        const token = await user.getIdToken();
+        const response = await fetch(`/exercises/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (response.status===200){
+            const exercises = await response.json()
+            exercises.forEach((item) => {
+                item.date = new Date(item.date)
+            })
+            setExercises(exercises);
+        } else{
+            const error = await response.json()
+            alert(error.error)
+        }
 
-
-    const loadExercises = async () => {
-        const response = await fetch('/exercises')
-        const exercises = await response.json()
-        setExercises(exercises);
+        setLoading(false)
     }
 
     useEffect(() => {
-        loadExercises();
-    }, []);
+        loadExercises(user);
+    }, [user]);
 
-    return (
-        <>
-        <Link to="/Create">Add an Exercise</Link>
-        <ExerciseTable exercises={exercises} onEdit = {onEdit} onDelete={onDelete} />
-        </>
-    )
+    if (!loading) {
+        return (
+            <>
+                <ExerciseTable exercises={exercises} onEdit={onEdit} onDelete={onDelete} />
+            </>
+        )
+    } else {
+        return (
+            <LoadingSymbol />
+        )
+    }
+
+
 }
 
 export default HomePage;
