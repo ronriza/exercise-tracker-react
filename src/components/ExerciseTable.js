@@ -43,16 +43,16 @@ function ExerciseTable({ exercises, onEdit, onDelete }) {
                     <Row>
                         <Col className="mt-3">
                             <h3 className='text-center'>Exercise List</h3>
-                            <Table striped hover className="mt-3">
+                            <Table responsive striped hover className="mt-3">
                                 <thead>
-                                    <tr className="text-center">
+                                    <tr>
                                         <th className="clickable" id="name" onClick={() => changeCritera('name')}>Name  <SortArrow id="name" sortCriteria={sortCriteria} /></th>
                                         <th className="clickable" id="reps" onClick={() => changeCritera('reps')}>Reps  <SortArrow id="reps" sortCriteria={sortCriteria} /></th>
                                         <th className="clickable" id="sets" onClick={() => changeCritera('sets')}>Sets  <SortArrow id="sets" sortCriteria={sortCriteria} /></th>
                                         <th className="clickable" id="weight" onClick={() => changeCritera('weight')}>Weight  <SortArrow id="weight" sortCriteria={sortCriteria} /></th>
                                         <th className="clickable" id="date" onClick={() => changeCritera('date')}>Date  <SortArrow id="date" sortCriteria={sortCriteria} /></th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th className="text-center">Edit</th>
+                                        <th className="text-center">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>

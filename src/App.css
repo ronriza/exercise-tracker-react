@@ -49,3 +49,7 @@
     transform: rotate(360deg);
   }
 }
+
+th, td {
+  white-space: nowrap;
+}
