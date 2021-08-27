@@ -8,6 +8,7 @@ function HomePage({ setExerciseToEdit, user }) {
     const [exercises, setExercises] = useState([]);
     const [loading, setLoading] = useState(false)
 
+    // sends http request to delete an exercise
     const onDelete = async id => {
         const token = await user.getIdToken()
         const response = await fetch(`/exercises/${id}`, {
@@ -24,11 +25,13 @@ function HomePage({ setExerciseToEdit, user }) {
         }
     }
 
+    // redirects to edit page
     const onEdit = async exerciseToEdit => {
         setExerciseToEdit(exerciseToEdit);
         history.push("/Edit");
     }
 
+    // sends http request to retrieve user's exercises
     const loadExercises = async (user) => {
         setLoading(true)
         const token = await user.getIdToken();
@@ -51,6 +54,7 @@ function HomePage({ setExerciseToEdit, user }) {
         setLoading(false)
     }
 
+    // loads exercises upon render
     useEffect(() => {
         loadExercises(user);
     }, [user]);

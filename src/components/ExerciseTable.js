@@ -12,6 +12,8 @@ function ExerciseTable({ exercises, onEdit, onDelete }) {
 
     let sortedExercises = [...exercises]
 
+    // sorts exercises based on sort criteria's field and direction.
+    // if fields is equal, sorts by date
     sortedExercises.sort((a, b) => {
     
         if (a[sortCriteria.field] < b[sortCriteria.field]) {
@@ -27,6 +29,7 @@ function ExerciseTable({ exercises, onEdit, onDelete }) {
         }
     })
 
+    // changes sort critera. allows toggling of sort direction
     const changeCritera = (field) => {
         let direction = 'descending'
         if (sortCriteria.field === field && sortCriteria.direction === 'descending') {

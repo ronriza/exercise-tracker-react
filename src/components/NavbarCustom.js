@@ -9,12 +9,13 @@ import { useHistory } from 'react-router-dom';
 function NavbarCustom({ isLoggedin }) {
   const history = useHistory();
 
-
+  // signs a user out through firebase and redirects to home page
   const signOut = () => {
     fire.auth().signOut()
     history.push('/')
   };
 
+  // navbar dynamically shows content based on logged in status
   if (isLoggedin) {
     return (
       <Navbar expand="md" bg="dark" variant="dark">

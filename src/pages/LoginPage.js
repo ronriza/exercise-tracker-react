@@ -16,6 +16,7 @@ function LoginPage() {
     const [failedLogin, setFailedLogin] = useState(false);
     const [failedSignUp, setFailedSignUp] = useState(false);
 
+    // signs in a user through firebase
     const signIn = (e) => {
         e.preventDefault()
         fire.auth().signInWithEmailAndPassword(email, password)
@@ -24,6 +25,7 @@ function LoginPage() {
             });
     }
 
+    // signs in a user anonymously through firebase
     const anonymousSignin = (e) => {
         fire.auth().signInAnonymously()
             .catch((error) => {
@@ -31,6 +33,7 @@ function LoginPage() {
             })
     }
 
+    // signs up a suer through firebase
     const signUp = (e) => {
         e.preventDefault()
         fire.auth().createUserWithEmailAndPassword(email, password)

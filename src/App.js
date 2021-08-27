@@ -16,6 +16,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [waiting, setWaiting] = useState(true)
 
+  // changes state if user logs in or out
   fire.auth().onAuthStateChanged((user) => {
     if (user) {
       setUser(user)
@@ -27,9 +28,11 @@ function App() {
     setWaiting(false)
   })
 
+  // ensures login page shows if user is not authenticated
   useEffect(() => {
     setTimeout(() => setWaiting(false), 500)
   }, [])
+
 
   if (waiting) {
     return (
@@ -67,7 +70,6 @@ function App() {
               </header>
             )}
         </Router>
-
       </div>
     );
   }

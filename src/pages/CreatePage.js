@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 
 
-
 function CreatePage({ user }) {
     const history = useHistory();
     const [name, setName] = useState('');
@@ -18,6 +17,7 @@ function CreatePage({ user }) {
     const [unit, setUnit] = useState('lbs');
     const [date, setDate] = useState('');
 
+    // sends an http request to create a new exercise and redirects to home page 
     const addExercise = async () => {
         const newExercise = { name, reps, sets, weight, unit, date };
         const token = await user.getIdToken();
@@ -90,28 +90,6 @@ function CreatePage({ user }) {
                     </Col>
                 </Row>
             </Container>
-            {/* <fieldset>
-                <legend>Add An Exercise</legend>
-                <label htmlFor='name'>Name </label>
-                <input type='text' id='name' value={name} onChange={e => setName(e.target.value)} />
-                <br/>
-                <label htmlFor='reps'># of Reps </label>
-                <input type='number' id='reps' value={reps} onChange={e => setReps(e.target.value)} />
-                <br/>
-                <label htmlFor='sets'># of Sets </label>
-                <input type='number' id='sets' value={sets} onChange={e => setSets(e.target.value)} />
-                <br/>
-                <label htmlFor='weight'>Weight </label>
-                <input type='number' id='weight' value={weight} onChange={e => setWeight(e.target.value)} />
-                <br/>
-                <label htmlFor='unit'>Units </label>
-                <input type='text' id='unit' value={unit} onChange={e => setUnit(e.target.value)} />
-                <br/>
-                <label htmlFor='date'>Date </label>
-                <input type='text' id='date' value={date} placeholder='MM-DD-YY' onChange={e => setDate(e.target.value)} />
-
-            </fieldset>
-            <button onClick={addExercise}>Add</button> */}
 
         </>
     )

@@ -18,6 +18,7 @@ function EditPage({ exerciseToEdit, user }) {
     const [unit, setUnit] = useState(exerciseToEdit.unit);
     const [date, setDate] = useState(`${String(exerciseToEdit.date.getUTCMonth()+1).padStart(2,'0')}-${String(exerciseToEdit.date.getUTCDate()).padStart(2,'0')}-${String(exerciseToEdit.date.getUTCFullYear()).slice(2)}`);
 
+    // sends an http request to edit an exercise and redirects to home page
     const editExercise = async () => {
         const token = await user.getIdToken();
         const response = await fetch(`/exercises/${exerciseToEdit._id}`, {
