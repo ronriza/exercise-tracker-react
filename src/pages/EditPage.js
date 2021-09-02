@@ -90,28 +90,6 @@ function EditPage({ exerciseToEdit, user }) {
                 </Row>
             </Container>
 
-            <fieldset>
-                <legend>Edit An Exercise</legend>
-                <label htmlFor='name'>Name </label>
-                <input type='text' id='name' value={name} onChange={e => setName(e.target.value)} />
-                <br />
-                <label htmlFor='reps'># of Reps </label>
-                <input type='number' id='reps' value={reps} onChange={e => setReps(e.target.value)} />
-                <br />
-                <label htmlFor='sets'># of Sets </label>
-                <input type='number' id='sets' value={sets} onChange={e => setSets(e.target.value)} />
-                <br />
-                <label htmlFor='weight'>Weight </label>
-                <input type='number' id='weight' value={weight} onChange={e => setWeight(e.target.value)} />
-                <br />
-                <label htmlFor='unit'>Units </label>
-                <input type='text' id='unit' value={unit} onChange={e => setUnit(e.target.value)} />
-                <br />
-                <label htmlFor='date'>Date </label>
-                <input type='text' id='date' value={date} onChange={e => setDate(e.target.value)} />
-            </fieldset>
-            <button onClick={editExercise}>Save</button>
-
         </>
     )
 }
